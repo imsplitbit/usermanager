@@ -1,3 +1,5 @@
+import json
+
 from app import db
 
 
@@ -34,6 +36,20 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User: {}>'.format(self.userid)
+
+    def as_dict(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'userid': self.userid,
+            'groups': self.groups,
+            'date_created': self.date_created,
+            'date_modified': self.date_modified
+        }
+
+    def json(self):
+        return json.dumps(self.as_dict())
 
 
 class Group(db.Model):
