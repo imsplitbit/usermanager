@@ -3,6 +3,7 @@ from flask_api import FlaskAPI
 from instance.config import app_config
 from usrmgr.models import db
 from usrmgr.blueprints.user import users
+from usrmgr.blueprints.group import groups
 
 
 def create_app(config_name):
@@ -13,5 +14,6 @@ def create_app(config_name):
     db.init_app(app)
 
     app.register_blueprint(users)
+    app.register_blueprint(groups)
 
     return app
