@@ -1,6 +1,7 @@
 import unittest
 import json
-from usrmgr import create_app, db
+from usrmgr import create_app
+from usrmgr.models import db
 
 
 class UserTestCase(unittest.TestCase):
@@ -14,9 +15,12 @@ class UserTestCase(unittest.TestCase):
             'last_name': 'Salinas',
             'userid': 'imsplitbit',
         }
-
+        print('before table creation')
         with self.app.app_context():
+            print('creating tables')
+            db.session.configure()
             db.create_all()
+        print('after table creation')
 
     def tearDown(self):
         with self.app.app_context():
@@ -25,7 +29,7 @@ class UserTestCase(unittest.TestCase):
 
     def test_user_creation(self):
         """Test API can create a user (POST)"""
-        res = self.client().post('/users/', data=self.testuser)
+        res = self.client().post('/users/users/', data=self.testuser)
         self.assertEqual(res.status_code, 201)
         data = json.loads(res.data)
         self.assertEqual(self.testuser['first_name'],

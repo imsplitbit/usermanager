@@ -16,7 +16,7 @@ class DevelopmentConfig(Config):
     Configuration for Dev
     """
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///.usrmgrdev.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/.usrmgrdev.db'
 
 
 class TestingConfig(Config):
@@ -24,7 +24,7 @@ class TestingConfig(Config):
     Configuration for testing, with a different db
     """
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///.usrmgrtest.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/.usrmgrtest.db'
     DEBUG = True
 
 
@@ -33,7 +33,7 @@ class StagingConfig(Config):
     Staging configuration
     """
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///.usrmgrstaging.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/.usrmgrstaging.db'
 
 
 class ProductionConfig(Config):
@@ -42,7 +42,7 @@ class ProductionConfig(Config):
     """
     DEBUG = False
     TESTING = False
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///.usrmgrprod.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/.usrmgrprod.db'
 
 
 app_config = {
