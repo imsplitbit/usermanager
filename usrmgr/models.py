@@ -54,7 +54,6 @@ class User(db.Model):
             'first_name': self.first_name,
             'last_name': self.last_name,
             'userid': self.userid,
-            'groups': self.groups,
             'date_created': self.date_created,
             'date_modified': self.date_modified
         }
