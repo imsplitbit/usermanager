@@ -1,12 +1,16 @@
 from flask import Blueprint, jsonify, request
 
-from usrmgr.models import Group
+from usrmgr.models import Group, User
 
 groups = Blueprint('groups', __name__, url_prefix='/api/v0')
 
 
 def fetch_group(groupid):
     return Group.query.filter_by(groupid=groupid).first()
+
+
+def fetch_user(userid):
+    return User.query.filter_by(userid=userid).first()
 
 
 @groups.route('/groups/<string:groupid>', methods=('POST',))

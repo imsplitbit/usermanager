@@ -1,6 +1,5 @@
 import unittest
 import json
-from copy import deepcopy
 from usrmgr import create_app
 from usrmgr.models import db
 
@@ -14,7 +13,8 @@ class UserTestCase(unittest.TestCase):
         self.testuserid = 'imsplitbit'
         self.testuser = {
             'first_name': 'Daniel',
-            'last_name': 'Salinas'
+            'last_name': 'Salinas',
+            'groups': json.dumps(['admins', 'superusers'])
         }
 
         with self.app.app_context():
@@ -28,6 +28,7 @@ class UserTestCase(unittest.TestCase):
     def add_testuser(self):
         res = self.client().post(
             '/api/v0/users/{}'.format(self.testuserid,), data=self.testuser)
+        print res.data
         self.assertEqual(res.status_code, 201)
         return res
 
@@ -75,6 +76,8 @@ class UserTestCase(unittest.TestCase):
         self.add_testuser()
         res = self.client().put(
             '/api/v0/users/{}'.format(self.testuserid,), data=usermod)
+        print res.data
+        self.assertEqual(0, 1)
         self.assertEqual(res.status_code, 200)
         data = json.loads(res.data)
         self.assertEqual(data['results']['userid'], usermod['userid'])

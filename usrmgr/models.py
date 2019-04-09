@@ -54,6 +54,9 @@ class User(db.Model):
             'first_name': self.first_name,
             'last_name': self.last_name,
             'userid': self.userid,
+            'groups': [
+                group.as_dict()['groupid'] for group in self.group_memberships
+                ],
             'date_created': self.date_created,
             'date_modified': self.date_modified
         }
@@ -98,7 +101,8 @@ class Group(db.Model):
 
     def as_dict(self):
         return {
-            'groupid': self.groupid
+            'groupid': self.groupid,
+            'users': [user.as_dict() for user in self.member_users],
         }
 
     def json(self):
